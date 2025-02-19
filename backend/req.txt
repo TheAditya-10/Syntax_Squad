@@ -1,0 +1,26 @@
+# Backend (Flask + SQLAlchemy + MySQL)
+Flask==3.0.1
+Flask-Cors==4.0.1
+Flask-RESTful==0.3.10
+Flask-SQLAlchemy==3.1.1
+mysql-connector-python==8.3.0
+gunicorn==21.2.0
+
+# AI/ML Libraries
+numpy==1.26.4
+pandas==2.2.0
+scikit-learn==1.4.2
+matplotlib==3.8.3
+seaborn==0.13.2
+
+# Deep Learning Frameworks (CPU Version for Compatibility)
+torch==2.1.2
+torchvision==0.16.2
+torchaudio==2.1.2
+tensorflow==2.15.0
+transformers==4.37.2
+
+# Utility & Deployment
+uvicorn==0.27.1
+python-dotenv==1.0.1
+requests==2.31.0

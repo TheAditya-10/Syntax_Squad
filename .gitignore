@@ -1,0 +1,33 @@
+# 🔥 Ignore Python Virtual Environment
+backend/venv/
+
+# 🔥 Ignore Compiled Python Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 🔥 Ignore Logs and Environment Files
+*.log
+logs/
+*.env
+.env.*
+
+# 🔥 Ignore Database Files
+*.sqlite3
+*.db
+
+# 🔥 Ignore Node.js Dependencies
+node_modules/
+ss/node_modules/
+
+# 🔥 Ignore Build and Dependency Files
+ss/build/
+ss/.cache/
+ss/dist/
+
+# 🔥 Ignore System & IDE Specific Files
+.DS_Store
+*.swp
+.idea/
+.vscode/
