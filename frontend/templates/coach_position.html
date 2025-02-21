@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Position Finder</title>
+    <style>
+        body {
+            background-color: #8a9988;
+        }
+        .bg-overlay {
+            background-color: rgba(139, 76, 76, 0.562);
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <h1 class="text-2xl font-bold mb-4">🎯 Find Coach Position</h1>
+    <form id="coachForm" class="flex flex-col items-center">
+        <input type="text" id="train_number" name="train_number" placeholder="Enter Train Number" class="mb-2 p-2 border rounded">
+        <input type="text" id="coach_id" name="coach_id" placeholder="Enter Coach ID" class="mb-2 p-2 border rounded">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Check Position</button>
+    </form>
+    <p id="result" class="mt-4 font-semibold"></p>
+
+    <script>
+        document.getElementById("coachForm").onsubmit = async function(event) {
+            event.preventDefault();
+            let trainNumber = document.getElementById("train_number").value;
+            let coachId = document.getElementById("coach_id").value;
+            let response = await fetch("/coach_position", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `train_number=${trainNumber}&coach_id=${coachId}`
+            });
+            let data = await response.json();
+            document.getElementById("result").innerText = data.predicted_position || data.error;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Travel Assistant</title>
+    <style>
+        body {
+            background-color: #8a9988;
+        }
+        .bg-overlay {
+            background-color: rgba(139, 76, 76, 0.562);
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Railway-Themed Styling */
+        body {
+            background: url('https://source.unsplash.com/1600x900/?train,railway') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen">
+
+    <div class="overlay p-8 rounded-lg shadow-lg text-white text-center w-full max-w-lg">
+        <h1 class="text-3xl font-bold mb-4">🚆 Railway Travel Assistant</h1>
+        <p class="mb-6">Your all-in-one solution for seamless train travel.</p>
+
+        <!-- Button 1: Train Coach Position Detection -->
+        <button onclick="window.location.href='/coach_position'" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-full w-full mb-4">
+            🎯 Find Exact Coach Stopping Position
+        </button>
+
+        <!-- Button 2: Food & Water Access Assistance -->
+        <button onclick="window.location.href='/food_avaliability'" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full w-full">
+            🍽️ Order Food or Find Nearby Shops
+        </button>
+
+        <!-- Future Features Section -->
+        <div class="mt-6 text-gray-300">
+            <h2 class="text-xl font-semibold">🚀 More Features Coming Soon...</h2>
+            <p>We will be adding more travel solutions soon. Stay tuned!</p>
+        </div>
+
+        <!-- Feature Display -->
+        <div id="featureInfo" class="mt-6 hidden p-4 bg-gray-800 rounded-lg"></div>
+    </div>
+
+    <script>
+        function showFeature(feature) {
+            let featureInfo = document.getElementById("featureInfo");
+            featureInfo.classList.remove("hidden");
+
+            if (feature === "coach") {
+                featureInfo.innerHTML = "<h2 class='text-xl font-bold'>🎯 Coach Position Finder</h2><p>We will track the train's order and predict the exact coach stopping position on the platform.</p>";
+            } else if (feature === "food") {
+                featureInfo.innerHTML = "<h2 class='text-xl font-bold'>🍽️ Food & Water Assistance</h2><p>If a pantry car is available, you can order food. Otherwise, we will detect nearby stores when your train stops.</p>";
+            }
+        }
+    </script>
+
+</body>
+</html>

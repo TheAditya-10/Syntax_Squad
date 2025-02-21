@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body {
+        background: url("{{ url_for('static', filename='bg.jpg') }}") no-repeat center center fixed;
+          background-color: #c5c6bf;
+      }
+      .bg-overlay {
+          background-color: rgba(139, 76, 76, 0.562);
+      }
+  </style>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<style>
+
+    .bg-bl{
+        background-color: rgba(74, 74, 74, 0.562);
+    }
+</style>
+<body class="bg-cover bg-center bg-no-repeat">
+  
+      <!-- <div class="relative h-[500px] overflow-hidden">
+        <img
+          src="../static/images/bg.jpg"
+          class="w-full h-full object-cover"
+        />
+        <div class="tab-container"> -->
+          <!-- <button class="tab-button active" onclick="showTab('login')">Login</button>
+          <button class="tab-button" onclick="showTab('register')">Register</button>
+      </div> -->
+
+        <div class="absolute inset-0 bg-bl bg-opacity-50 flex items-center justify-center">
+          <div class="text-center text-white p-8">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Margdarshak-Mitr</h1>
+            <p class="text-xl mb-8">"मार्गदर्शक मित्र – आपकी यात्रा का सच्चा साथी!" 🚆✨</p>
+            <!-- <a href="./planner.html">   -->
+
+            <button
+            onclick="window.location.href='/planner'"
+              class="bg-gray-700 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-500 transition"
+              >
+              Planner 
+            </button>
+            <!-- </a> -->
+            <!-- <a href="./traveller.html">   -->
+
+            <button
+            onclick="window.location.href='/traveller'"
+            class="bg-gray-700 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-500 transition"
+          
+            >
+            Traveller
+          </button>
+            <!-- </a> -->
+          <!-- <a href="./guider.html">   -->
+          <button
+          onclick="window.location.href='/guider'"
+          class="bg-gray-700 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-500 transition"
+        >
+        Guider
+        </button>
+      <!-- </a> -->
+          </div>
+        </div>
+      </div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Chatbot</title>
+    <style>
+        body {
+            background-color: #8a9988;
+        }
+        .bg-overlay {
+            background-color: rgba(139, 76, 76, 0.562);
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white shadow-lg rounded-lg w-full max-w-lg flex flex-col">
+        <!-- Chat Header -->
+        <div class="bg-blue-500 text-white p-4 flex items-center justify-between rounded-t-lg">
+            <h2 class="text-lg font-bold">🌍 Travel Assistant</h2>
+            <span class="text-sm">Online</span>
+        </div>
+
+        <!-- Chat Messages -->
+        <div id="chatBox" class="p-4 h-96 overflow-y-auto space-y-2 flex flex-col">
+            <div class="text-center text-gray-500 text-sm">Ask me anything about your journey! 🚆✈️</div>
+        </div>
+
+        <!-- User Input -->
+        <div class="p-3 border-t flex items-center bg-gray-50">
+            <input type="file" id="imageInput" class="hidden" accept="image/*">
+            <label for="imageInput" class="cursor-pointer text-blue-500 hover:text-blue-700">
+                📸
+            </label>
+            <input id="userInput" type="text" placeholder="Type your message..." class="flex-grow p-2 border rounded-lg mx-2 focus:outline-none">
+            <button id="sendBtn" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("sendBtn").addEventListener("click", sendMessage);
+            document.getElementById("imageInput").addEventListener("change", sendImage);
+        });
+
+        async function sendMessage() {
+            const userMessage = document.getElementById("userInput").value.trim();
+            if (!userMessage) return;
+
+            appendMessage(userMessage, "user");
+
+            try {
+                const response = await fetch('/guider', {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ place: userMessage })
+                });
+
+                const data = await response.json();
+                appendMessage(data.info, "bot");
+                document.getElementById("userInput").value = "";
+            } catch (error) {
+                appendMessage("⚠️ Error fetching response", "bot");
+                console.error("Error:", error);
+            }
+        }
+
+        async function sendImage() {
+            const imageInput = document.getElementById("imageInput").files[0];
+            if (!imageInput) return;
+
+            appendImage(imageInput, "user");
+
+            const formData = new FormData();
+            formData.append("image", imageInput);
+
+            try {
+                const response = await fetch('/get_info_from_image', {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+                appendMessage(data.info, "bot");
+            } catch (error) {
+                appendMessage("⚠️ Image processing failed", "bot");
+                console.error("Error:", error);
+            }
+        }
+
+        function appendMessage(text, sender) {
+            const chatBox = document.getElementById("chatBox");
+            const msgDiv = document.createElement("div");
+            msgDiv.classList.add("p-2", "rounded-lg", "max-w-xs", "text-white", "mt-1", "w-fit", "flex");
+
+            if (sender === "user") {
+                msgDiv.classList.add("bg-blue-500", "ml-auto");
+            } else {
+                msgDiv.classList.add("bg-gray-700");
+            }
+
+            msgDiv.textContent = text;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function appendImage(image, sender) {
+            const chatBox = document.getElementById("chatBox");
+            const imgDiv = document.createElement("div");
+            imgDiv.classList.add("p-1", "rounded-lg", "mt-1", "w-fit", "flex");
+
+            if (sender === "user") {
+                imgDiv.classList.add("ml-auto");
+            }
+
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(image);
+            img.classList.add("w-40", "h-auto", "rounded-lg");
+
+            imgDiv.appendChild(img);
+            chatBox.appendChild(imgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>
