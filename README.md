@@ -17,15 +17,20 @@ This web application provides essential train services, including:
 ## 📂 Project Structure
 ```
 📁 project_root/
-│-- 📁 static/
-│   │-- 📁 images/
-│   │   └── bg.jpg
-│-- 📁 templates/
+│-- 📁 backend/
+    |-- 📁 models/
+        └── database.py
+│   │-- 📁 routes/
+│   │   └── guide.py
+│   │   └── plan.py
+│   │   └── svm_coach_predictor.py
+│   │   └── travel.py
+│   └── app.py
+│   └── req.txt
+│-- 📁 frontend/
 │   │-- coach_position.html
 │   │-- food_availability.html
 │   │-- index.html
-│-- app.py
-│-- requirements.txt
 │-- README.md
 ```
 
